@@ -2,6 +2,9 @@ package main;
 
 import product.Product;
 import product.ProductService;
+import product.strategy.ChristmasDiscountStrategy;
+import product.strategy.DiscountService;
+import product.strategy.DiscountStrategyType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,18 +30,19 @@ public class Main {
                 Arrays.asList(productOne,productTwo,productThree,productFour);
 
 
+
         System.out.println("Christmas time ...");
-        products.forEach(p->p.setDiscount(ProductService.christmasDiscount(p.getCost())));
+        products.forEach(p->p.setDiscount(DiscountService.calculateDiscount(DiscountStrategyType.CHRISTMAS, p.getCost())));
         products.forEach(p->p.showProductInfo());
 
 
         System.out.println("\n\nNew Yer time ...");
-        products.forEach(p->p.setDiscount(ProductService.newYearDiscount(p.getCost())));
+        products.forEach(p->p.setDiscount(DiscountService.calculateDiscount(DiscountStrategyType.NEW_YEAR, p.getCost())));
         products.forEach(p->p.showProductInfo());
 
 
         System.out.println("\n\nEaster time ...");
-        products.forEach(p->p.setDiscount(ProductService.easterDiscount(p.getCost())));
+        products.forEach(p->p.setDiscount(DiscountService.calculateDiscount(DiscountStrategyType.EASTER, p.getCost())));
         products.forEach(p->p.showProductInfo());
 
     }
